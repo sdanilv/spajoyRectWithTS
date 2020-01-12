@@ -3,24 +3,25 @@ import style from "./Shop.module.scss"
 import FindForm from "./FindForm/FindForm";
 import {connect} from "react-redux"
 import {getProductsWithFilter, getShopPrice, getShopProducts} from "../../redux/Shop/ShopSelector";
+import {IProduct} from "../../redux/Shop/ShopInterface";
 
 
-const Shop:React.FC = props => {
+const Shop:React.FC = (props: any) => {
 
     const [price, changePrice] = useState({min: props.price.min, max: props.price.max});
 
     // const submitFindForm = ({town, gender, category, price}) => {
     //     props.changeViewParameters(town, gender, category, price)
     // };
-    const submitFindForm = (formParam) => {
+    const submitFindForm = (formParam: ) => {
         console.log({...formParam, price});
         props.changeViewParameters({...formParam, price})
     };
-    const submitPriceForm = ({minSlider, maxSlider}) => {
+    const submitPriceForm = ({minSlider, maxSlider} : any) => {
         changePrice({min: minSlider, max: maxSlider})
     };
 
-    const products = props.products.map((product, index) => {
+    const products = props.products.map((product:IProduct, index: number) => {
         return <div key={index} className={style.product}>
             <div>
                 <div><img src={product.img} alt="Colorlib Template"/></div>

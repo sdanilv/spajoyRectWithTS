@@ -1,9 +1,9 @@
-import React, {useEffect, useState} from "react";
+import React, {Props, useEffect, useState} from "react";
 import style from "./FindForm.module.scss"
 import PriceRangeSlider from "../../../common/PriceRangeSlider/PriceRangeSlider";
 import {Field, reduxForm} from "redux-form";
 
-const FindForm: React.FC = props => {
+const FindForm: React.FC = (props:any) => {
     const [isSeePriceArea, seePriceArea] = useState(false);
     const [isSeeForm, seeForm] = useState(true);
     useEffect(() => {
@@ -21,7 +21,7 @@ const FindForm: React.FC = props => {
 
     return (<>
         <div className={style.hideButton}>
-            <button type="hideButton" onClick={seeFormToggle}>
+            <button type="button" onClick={seeFormToggle}>
                 {isSeeForm ? "Сховати" : "Знайти"}
             </button>
             <div className={style.cart}>
@@ -92,4 +92,7 @@ const FindForm: React.FC = props => {
     </>)
 };
 
-export default reduxForm({form: "shopParam"})(FindForm);
+export default reduxForm<{},  {
+    previousPage: any;
+    isLoading: boolean;
+}>({form: "shopParam"})(FindForm);

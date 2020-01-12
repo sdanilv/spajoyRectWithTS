@@ -1,5 +1,6 @@
+import  {IShopState} from "./ShopInterface"
 import {createSelector } from "reselect"
-export  const getShopProducts = state => state.shop.products;
+export  const getShopProducts  =( state: IShopState) => state.shop.products;
 export const  getFilter = state => state.shop.filter;
 export  const getShopPrice = state => getFilter(state).price;
 export const getProductsWithFilter = createSelector([getShopProducts, getFilter],
