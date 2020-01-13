@@ -1,21 +1,21 @@
-import React, {SyntheticEvent} from "react";
+import React from "react";
 import s from "./PriceRangeSlider.module.scss"
 import {Field, reduxForm} from "redux-form"
 
 const PriceRangeSlider: React.FC = (props: any) => {
 
-    let minPrice = props.initialValues.minSlider;
-    let maxPrice = props.initialValues.minSlider;
+    let minPrice : number = props.initialValues.minSlider;
+    let maxPrice : number = props.initialValues.minSlider;
     const changeMinPrice = (eve: React.ChangeEvent<HTMLInputElement>) => {
-        minPrice = eve.target.value;
+        minPrice = parseInt( eve.target.value, 10)
     };
 
     const changeMaxPrice = (eve: React.ChangeEvent<HTMLInputElement>) => {
-        maxPrice = eve.target.value;
+        maxPrice = parseInt( eve.target.value, 10)
     };
 
     return (
-        <form onBlur={props.handleSubmit} className={s.priceSlider}>
+        <div onBlur={props.handleSubmit} className={s.priceSlider}>
             <span>
     <Field name="minSlider" component="input" type="number" value={minPrice} min="0" max="1500"/>
     <Field name="maxSlider" component="input" type="number" value={maxPrice} min="0" max="1500"/>
@@ -27,10 +27,10 @@ const PriceRangeSlider: React.FC = (props: any) => {
             <svg width="100%" height="24">
                 <line x1="4" y1="0" x2="300" y2="0" stroke="#212121" strokeWidth="12" strokeDasharray="1 28"/>
             </svg>
-            <button type="reset" onClick={props.reset}>
-                Clear Values
+            <button type="button" onClick={props.reset}>
+                Выбрать
             </button>
-        </form>
+        </div>
     )
 };
 

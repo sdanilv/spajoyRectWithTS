@@ -2,8 +2,9 @@ import React, {useState} from "react";
 import style from "./Shop.module.scss"
 import FindForm from "./FindForm/FindForm";
 import {connect} from "react-redux"
-import {getProductsWithFilter, getShopPrice, getShopProducts} from "../../redux/Shop/ShopSelector";
-import {IProduct} from "../../redux/Shop/ShopInterface";
+import {getProductsWithFilter, getShopPrice} from "../../redux/Shop/ShopSelector";
+import {IFilter, IProduct} from "../../redux/Shop/ShopInterface";
+import {changeFilters} from "../../redux/Shop/ShopReducer";
 
 
 const Shop:React.FC = (props: any) => {
@@ -13,16 +14,16 @@ const Shop:React.FC = (props: any) => {
     // const submitFindForm = ({town, gender, category, price}) => {
     //     props.changeViewParameters(town, gender, category, price)
     // };
-    const submitFindForm = (formParam: ) => {
+    const submitFindForm = (formParam: IFilter) => {
         console.log({...formParam, price});
-        props.changeViewParameters({...formParam, price})
+        props.changeFilters({...formParam, price})
     };
     const submitPriceForm = ({minSlider, maxSlider} : any) => {
-        changePrice({min: minSlider, max: maxSlider})
+        changePrice({min: parseInt(minSlider, 10), max: parseInt(maxSlider, 10)})
     };
 
     const products = props.products.map((product:IProduct, index: number) => {
-        return <div key={index} className={style.product}>
+        return <div key={index} className={style.product+" "+ style.animation}>
             <div>
                 <div><img src={product.img} alt="Colorlib Template"/></div>
                 <div className="text py-3 px-3">
@@ -36,7 +37,7 @@ const Shop:React.FC = (props: any) => {
                     </div>
                     <p className="bottom-area d-flex">
                         <button data-id={product.dataId}
-                                type="cart">Додати в кошик
+                                type="button">Додати в кошик
                         </button>
                     </p>
                 </div>
@@ -51,17 +52,15 @@ const Shop:React.FC = (props: any) => {
         <h5>Нічого не знайдено!
             Відповідно до Вашого запиту ми не змогли нічого підібрати.</h5>
         <div id="CartPlace">
-            <h4 d="root">Кошик</h4>
+            <h4 id="root">Кошик</h4>
             <p className="text-center">Введіть Ваш імейл і оберіть зручний спосіб оплати</p>
-            <div id="service"></div>
+            <div id="service"> </div>
         </div>
     </div>
 };
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state : any) => ({
     products: getProductsWithFilter(state),
     price: getShopPrice(state)
 });
-const mapDispatchToProps = ({shop}) => ({
-    changeViewParameters: (param) => shop.changeViewParameters({...param})
-});
-export default connect(mapStateToProps, mapDispatchToProps)(Shop);
+
+export default connect(mapStateToProps, {changeFilters})(Shop);

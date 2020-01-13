@@ -1,14 +1,14 @@
 import React, {Props, useEffect, useState} from "react";
 import style from "./FindForm.module.scss"
 import PriceRangeSlider from "../../../common/PriceRangeSlider/PriceRangeSlider";
-import {Field, reduxForm} from "redux-form";
+import {Field, FormSubmitProp, reduxForm} from "redux-form";
 
 const FindForm: React.FC = (props:any) => {
     const [isSeePriceArea, seePriceArea] = useState(false);
     const [isSeeForm, seeForm] = useState(true);
     useEffect(() => {
         if (window.innerWidth < 750)
-            seeForm(false)
+            seeForm(false);
     }, []);
 
     const seePriceAreaToggle = () => {
@@ -93,6 +93,5 @@ const FindForm: React.FC = (props:any) => {
 };
 
 export default reduxForm<{},  {
-    previousPage: any;
-    isLoading: boolean;
+    onSubmit:any,  submitPriceForm:any,  price:any
 }>({form: "shopParam"})(FindForm);

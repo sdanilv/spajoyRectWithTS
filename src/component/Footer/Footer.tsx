@@ -46,8 +46,8 @@ const Footer:React.FC = props => {
             <div>
                 <div>
                     <p>
-                        All rights reserved | This template is made with <i
-                        aria-hidden="true"></i> by <a
+                        All rights reserved | This template is made with
+                        <i aria-hidden="true"> </i> by <a
                         href="https://colorlib.com" target="_blank">Colorlib</a>
                     </p>
                 </div>

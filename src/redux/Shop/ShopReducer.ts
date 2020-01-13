@@ -2,15 +2,13 @@ import mass from "../../images/mass.jpg"
 import spa from "../../images/spa.jpg"
 import salt from "../../images/salt.jpg"
 import {IFilter, IShopState} from "./ShopInterface";
-import {Reducer} from "redux";
+import {AnyAction, Reducer} from "redux";
 
 enum actionType {
     CHANGE_FILTERS = "SHOP_CHANGE_FILTERS",
     CHANGE_PRICE_FILTER = "SHOP_CHANGE_PRICE_FILTER"
 }
 
-// const CHANGE_FILTERS = "SHOP_CHANGE_FILTERS";
-// const CHANGE_PRICE_FILTER = "SHOP_CHANGE_PRICE_FILTER";
 const initialState: IShopState = {
     filter: {
         price: {
@@ -106,13 +104,27 @@ const initialState: IShopState = {
     ]
 };
 
-const ShopReducer = (state = initialState, action: { [key: string]: any, type: actionType, filterParam?: object }) => {
+const ShopReducer = (state = initialState, action: { [key: string]: any, type: actionType }) => {
     switch (action.type) {
         case actionType.CHANGE_FILTERS:
             return {...state, filter: {...state.filter, ...action.filterParam}};
         case actionType.CHANGE_PRICE_FILTER:
-            return {...state, price: {min: action.min, max: action.max}}
+            return {...state, price: {min: action.min, max: action.max}};
+        default:
+            return state;
+    }
+};
+export const changeFilters = (filter: IFilter) => {
+    return {
+        type: actionType.CHANGE_FILTERS,
+        filterParam: {...filter}
+    }
+};
+export const changePriceFilters = (min:number, max:number) => {
+    return {
+        type: actionType.CHANGE_PRICE_FILTER,
+        min, max
     }
 };
 
-export default ShopReducer as Reducer<any, any>;
+export default ShopReducer as Reducer<any, AnyAction>;

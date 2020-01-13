@@ -21,3 +21,14 @@
         min-width: 100%;
     }
 }
+@keyframes cards {
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+.animation{
+    animation: cards 2s;
+}
