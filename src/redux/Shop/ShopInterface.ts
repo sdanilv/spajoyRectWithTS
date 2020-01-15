@@ -1,8 +1,9 @@
+export interface IPrice {
+    min: number,
+    max: number
+}
 export interface IFilter{
-        price: {
-            min: number,
-            max: number
-        }
+        price?: IPrice
         town?: string,
         gender?: string,
         category?: string

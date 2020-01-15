@@ -5,7 +5,7 @@ import {Field, reduxForm} from "redux-form"
 const PriceRangeSlider: React.FC = (props: any) => {
 
     let minPrice : number = props.initialValues.minSlider;
-    let maxPrice : number = props.initialValues.minSlider;
+    let maxPrice : number = props.initialValues.maxSlider;
     const changeMinPrice = (eve: React.ChangeEvent<HTMLInputElement>) => {
         minPrice = parseInt( eve.target.value, 10)
     };

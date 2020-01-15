@@ -1,34 +1,50 @@
-.shop{
-    width: 100%;
-}
-.shop:after{
+.shop {
+  width: 100%;
+
+  &:after {
     content: "";
     clear: both;
     display: table;
-}
+  }
 
-.shop img{
+  img {
     /*min-width: 250px;*/
     height: auto;
     width: 100%;
-}
-.product{
+  }
+
+  .product {
     max-width: 23%;
     min-width: 250px;
     margin: 10px;
     float: left;
-    @media (max-width: 500px){
-        min-width: 100%;
+    animation: opc 2s;
+    @media (max-width: 500px) {
+      min-width: 100%;
     }
+
+    p {
+      margin: 3px 0
+    }
+
+    h3 {
+      font-size: 1.3rem
+    }
+
+    .addToCart {
+background: lightpink;
+        border-radius: 5px;
+        border: none;
+        font-size: 1rem;
+    }
+  }
 }
-@keyframes cards {
-    0%{
-        opacity: 0;
-    }
-    100%{
-        opacity: 1;
-    }
-}
-.animation{
-    animation: cards 2s;
+
+@keyframes opc {
+  1% {
+    opacity: 0
+  }
+  100% {
+    opacity: 1
+  }
 }

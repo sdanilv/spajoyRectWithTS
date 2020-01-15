@@ -16,7 +16,7 @@ export const getProductsWithFilter = createSelector([getShopProducts, getFilter]
                 if (filter.town !== "empty" && product.town !== filter.town) trigger = false;
                 if (filter.gender !== "empty" && product.gender !== filter.gender) trigger = false;
                 if (filter.category !== "empty" && product.category !== filter.category) trigger = false;
-                if (filter.price.max < product.price || filter.price.min > product.price)  trigger = false;
+                if (filter.price && (filter.price.max < product.price || filter.price.min > product.price))  trigger = false;
                     return trigger;
             }
         )

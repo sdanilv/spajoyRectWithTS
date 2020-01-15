@@ -1,14 +1,39 @@
 .header {
   display: flex;
+  width: 100%;
+position: sticky;
+  top:0;
+  background: white;
 
   li {
-padding-left: 10px;
+    margin: 0 10px;
     float: left;
     display: block;
   }
 
+  ul {
+    margin: 0;
+  }
   a {
     text-decoration: none;
     color: black;
   }
+
+   .logo {
+    font-weight: 300;
+    font-size: 20px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-right: auto;
+  }
+
+  .navbar {
+    margin-left: auto;
+  }
+
+  .navbarButton {
+  height: 25px;
+    border: black solid 1px;
+    border-radius: 3px;
+    }
 }

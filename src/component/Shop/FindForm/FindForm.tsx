@@ -1,11 +1,14 @@
-import React, {Props, useEffect, useState} from "react";
+import React, { useEffect, useState} from "react";
 import style from "./FindForm.module.scss"
 import PriceRangeSlider from "../../../common/PriceRangeSlider/PriceRangeSlider";
-import {Field, FormSubmitProp, reduxForm} from "redux-form";
+import {Field,  reduxForm} from "redux-form";
+import { IPrice} from "../../../redux/Shop/ShopInterface";
+import Cart from "./Cart/Cart";
 
 const FindForm: React.FC = (props:any) => {
-    const [isSeePriceArea, seePriceArea] = useState(false);
-    const [isSeeForm, seeForm] = useState(true);
+
+    const [isSeePriceArea, seePriceArea] = useState<boolean>(false);
+    const [isSeeForm, seeForm] = useState<boolean>(true);
     useEffect(() => {
         if (window.innerWidth < 750)
             seeForm(false);
@@ -19,30 +22,26 @@ const FindForm: React.FC = (props:any) => {
         seeForm(!isSeeForm);
     };
 
-    return (<>
+
+    return (
+        <>
         <div className={style.hideButton}>
             <button type="button" onClick={seeFormToggle}>
                 {isSeeForm ? "Сховати" : "Знайти"}
             </button>
-            <div className={style.cart}>
-                <a href="#CartPlace">
-                    <img src="https://img.icons8.com/pastel-glyph/2x/shopping-cart--v2.png"
-                         alt="cart"/>
-                    <span>0</span>
-                </a>
-            </div>
+        <Cart />
         </div>
         {isSeeForm && <form onSubmit={props.handleSubmit} className={style.findForm}>
             <label>Місто:</label>
             <Field  component="select" name="town">
-                <option value="empty">Обрати</option>
+                <option value={props.town}>{props.town}</option>
                 <option value="Київ">Київ</option>
                 <option value="Запоріжжя">Запоріжжя</option>
                 <option value="Одеса">Одеса</option>
             </Field>
 
             <label>Кому:</label>
-            <Field component="select" name="gender">
+            <Field selected ="Для неї" component="select" name="gender">
                 <option value="empty">Обрати</option>
                 <option value="Для неї">Для неї</option>
                 <option value="Для нього">Для нього</option>
@@ -81,17 +80,11 @@ const FindForm: React.FC = (props:any) => {
                     Знайти
                 </button>
             </div>
-            <div className={style.cart}>
-                <a href="#CartPlace">
-                    <img src="https://img.icons8.com/pastel-glyph/2x/shopping-cart--v2.png"
-                         alt="cart"/>
-                    <span>0</span>
-                </a>
-            </div>
+          <Cart/>
         </form>}
     </>)
 };
 
 export default reduxForm<{},  {
-    onSubmit:any,  submitPriceForm:any,  price:any
+    onSubmit:any,  submitPriceForm(param:object):void,  price:IPrice, town: "string"
 }>({form: "shopParam"})(FindForm);

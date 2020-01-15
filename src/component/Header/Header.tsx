@@ -1,25 +1,25 @@
-import React from "react";
+import React, {useState} from "react";
 import style from "./Header.module.scss"
 
-const  Header :React.FC = props =>{
-return <nav className={style.header}>
-    {/*<a className="navbar-brand" href="#" style="padding-left: 50px">Spajoy</a>*/}
-    {/*<button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"*/}
-    {/*        aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">*/}
-    {/*    <span className="navbar-toggler-icon"></span>*/}
-    {/*</button>*/}
+const Header: React.FC = props => {
+    const [seeNavbar, isSeeNavbar] = useState<boolean>(true);
+    const NavbarButton: React.FC = () => <img onClick={() => isSeeNavbar(!seeNavbar)} alt="navbarImg"className={style.navbarButton}
+                                        src="https://cdn4.iconfinder.com/data/icons/mobile-app-navigation-line-style/32/Hamburger_Menu-512.png"/>;
 
-    <div className="collapse navbar-collapse justify-content-end" id="navbarText">
-        <ul className="navbar-nav ml-auto">
-            <li className=" active"><a href="#about" className="nav-link">Про компанію</a></li>
-            <li className=""><a href="#how" className="nav-link">Як це працює</a></li>
-            <li ><a href="#delivery" className="nav-link">Доставка</a></li>
-            <li ><a href="#contact" className="nav-link">Контакти</a></li>
-
-        </ul>
-
-    </div>
-</nav>
+    return <nav className={style.header}>
+        <div className={style.logo}> Spajoy</div>
+        {seeNavbar ?
+           <NavbarButton /> :
+            <div className={style.navbar}>
+                <ul className="">
+                    <li className=" active"><a href="#about" className="nav-link">Про компанію</a></li>
+                    <li className=""><a href="#how" className="nav-link">Як це працює</a></li>
+                    <li><a href="#delivery" className="nav-link">Доставка</a></li>
+                    <li><a href="#contact" className="nav-link">Контакти</a></li>
+                    <NavbarButton />
+                </ul>
+            </div>}
+    </nav>
 
 };
-export  default Header;
+export default Header;

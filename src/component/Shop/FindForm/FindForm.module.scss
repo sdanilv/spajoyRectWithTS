@@ -19,22 +19,19 @@ $height: 28px;
 
 .findForm {
   position: sticky;
-  top: 28px;
+  top: 27px;
   display: flex;
   background: rgb(248, 249, 250);
   padding: 5px 0;
-  opacity: 0.7;
-  transition: opacity 0.5s ease-in-out;
+
   @media all and (max-width: $changeWidth) {
     display: block;
+    top: 56px;
     .cart {
       display: none;
     }
   }
 
-  &:hover{
-    opacity: 1;
-  }
   > * {
     font-size: 1rem;
     height: $height;
@@ -65,7 +62,7 @@ $height: 28px;
 .hideButton {
   display: flex;
   position: sticky;
-  top: 0;
+  top: 27px;
   opacity: 0.5;
 
   &:hover {
@@ -87,19 +84,7 @@ $height: 28px;
   }
 }
 
-.cart {
-  background: orange;
-  padding: 0 10px;
-  border-radius: 20px;
-  margin: 0 auto;
 
-  img {
-    margin-top: 2px;
-    width: 20px;
-    height: 20px;
-  }
-
-}
 
 .submitFindFormDiv {
   margin: 0 auto;
@@ -148,7 +133,8 @@ $height: 28px;
     position: static;
     width: calc(100% - 20px);
   }
-  button{
+
+  button {
     width: 100%;
   }
 }
